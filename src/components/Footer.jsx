@@ -3,7 +3,7 @@ import { Instagram } from "lucide-react";
 
 function Footer() {
   return (
-    <div className="w-full bg-gray-100 mt-10 overflow-x-hidden">
+    <div className="w-full bg-white mt-10 overflow-x-hidden">
       
       {/* Top Grid */}
       <div className="w-full flex flex-col md:flex-row justify-between px-6 md:px-16 py-10 gap-10">
