@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { getProducts } from "../api/product.api";
 import Loader from "../components/Loader";
 import Oops from "../components/Oops";
-import { Heart, ShoppingCart } from "lucide-react";
+import { Heart, Instagram, ShoppingCart } from "lucide-react";
 
 function ProductPage() {
     const { id } = useParams();
@@ -115,13 +115,27 @@ function ProductPage() {
 
 
 
+            
+            <div className="w-full px-6 md:px-16 pb-10">
+        <img
+          src="https://res.cloudinary.com/drrj8rl9n/image/upload/v1763724939/Gemini_Generated_Image_9y17m59y17m59y17_aunkz4.jpg"
+          alt="logo"
+          className="w-20 mb-5"
+        />
 
-            {/* No More Products */}
-            {!hasNextPage && (
-                <h3 className="text-center text-gray-500 mt-10 mb-10">
-                    No more products available
-                </h3>
-            )}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-5">
+          <p className="text-sm md:text-base">
+            The content of this site is copyright-protected and is the property
+            of R & M Hennes & Mauritz AB.
+          </p>
+
+          <div className="flex gap-4">
+            <a href="#">
+              <Instagram/>
+            </a>
+          </div>
+        </div>
+      </div>
         </div>
     );
 }
