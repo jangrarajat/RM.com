@@ -13,6 +13,12 @@ function Home() {
     "https://i.pinimg.com/736x/8e/e1/b4/8ee1b48a823c94db993235cb302dab3a.jpg",
   ];
 
+  const kidsHighlights = [
+    "https://res.cloudinary.com/drrj8rl9n/image/upload/v1763790766/WhatsApp_Image_2025-11-21_at_18.46.57_f655eb98_vbd1bq.jpg",
+    "https://res.cloudinary.com/drrj8rl9n/image/upload/v1763791167/Gemini_Generated_Image_r3ou6rr3ou6rr3ou_tq4d0t.png",
+    "https://res.cloudinary.com/drrj8rl9n/image/upload/v1763791391/Gemini_Generated_Image_4ylece4ylece4yle_sygzpj.png",
+  ];
+
   return (
     <div className="w-full min-h-screen overflow-x-hidden">
 
@@ -68,6 +74,27 @@ function Home() {
           ))}
         </div>
       </div>
+
+
+      {/* KIDS SECTION */}
+      <div className="w-full mt-10">
+        <div className="w-full h-20 px-6 md:px-10 flex items-center">
+          <h2 className="text-2xl font-serif uppercase">[Kids]</h2>
+          <p className="uppercase ml-4">highlights</p>
+        </div>
+
+        <div className="w-full flex flex-col md:flex-row justify-center gap-4 px-4 overflow-hidden">
+          {kidsHighlights.map((URL, i) => (
+            <div
+              key={i}
+              className="w-full md:w-1/3 h-[70vh] bg-cover bg-center cursor-pointer rounded"
+              style={{ backgroundImage: `url('${URL}')` }}
+            ></div>
+          ))}
+        </div>
+      </div>
+
+
     </div>
   );
 }
