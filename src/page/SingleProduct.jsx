@@ -31,7 +31,7 @@ function SingleProduct() {
                     <div className='w-full min-h-[70vh] flex flex-col md:flex-row '>
                         <div className='md:h-full md:w-[50%] flex  justify-center items-center '>
 
-                            <img src={mainProduct.imageUrl} className='md:h-[80vh] ' alt="" />
+                            <img src={mainProduct.imageUrl.replace("http://", "https://")} className='md:h-[80vh] ' alt="" />
 
                         </div>
                         <div className='md:h-[100%] md:w-[50%]  '>
