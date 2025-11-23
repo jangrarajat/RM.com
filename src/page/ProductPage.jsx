@@ -104,7 +104,7 @@ function ProductPage() {
                         <Link to={`/product/details/${item._id}`}>
                             <div
                                 className="w-full h-80 md:h-[450px] bg-cover bg-center cursor-pointer"
-                                style={{ backgroundImage: `url('${item.imageUrl}')` }}
+                                style={{ backgroundImage: `url('${item.imageUrl.replace("http://", "https://")}')` }}
                             ></div>
                         </Link>
 

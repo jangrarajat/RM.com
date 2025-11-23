@@ -35,7 +35,7 @@ function SingleProduct() {
 
                         </div>
                         <div className='md:h-[100%] md:w-[50%]  '>
-                            <div className='min-h-fit md:h-[80vh] mt-3 w-full flex flex-col px-3  justify-center items-start '>
+                            <div className='min-h-fit md:h-[80vh] mt-3 w-full flex flex-col px-3 pr-3  justify-center items-start '>
                                 <h1 className=' uppercase  w-full md:w-[60%] flex justify-between text-2xl'>
                                     {mainProduct.name}
                                     <Heart />
