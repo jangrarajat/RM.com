@@ -15,7 +15,7 @@ function Login({ setIsLoginView, setShowAuth }) {
 
 
     return (
-        <div className=' fixed z-50 flex justify-center items-center bg-black/30 backdrop-blur-sm w-full h-full'>
+        <div className=' fixed z-50 flex justify-center items-center bg-black/30 backdrop-blur-sm w-full h-[100vh]'>
             <div className='w-full h-full bg-white md:w-[32%] md:h-[80%] sm:w-[60%] sm:h-[80%]  flex flex-col'>
                 <div className='h-[10%] w-full  flex items-center justify-between  px-4'>
                     <h3 className=' uppercase'>
