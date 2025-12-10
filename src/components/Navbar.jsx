@@ -4,18 +4,23 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import Login from './auth/Login'
 import Registration from './auth/Registration'
-
+import { useNavigate } from 'react-router-dom'
 function Navbar() {
-    const [showAuth, setShowAuth] = useState(false)
-    const [isLoginView, setIsLoginView] = useState(true);
-     const { user } = useAuth()
+    const navigate = useNavigate()
+
+    const { user,
+        showAuth,
+        setShowAuth,
+        isLoginView,
+        setIsLoginView } = useAuth()
 
     useEffect(() => {
         console.log(user)
     }, [])
 
     const showUser = () => {
-        if (user === null) setShowAuth(true)
+        if (user === null) return setShowAuth(true)
+        navigate('/user')
     }
 
 
@@ -23,12 +28,12 @@ function Navbar() {
 
     return (
         <>
-            {showAuth ?isLoginView ? (
-             <Login setIsLoginView={setIsLoginView} setShowAuth={setShowAuth} />
+            {showAuth ? isLoginView ? (
+                <Login setIsLoginView={setIsLoginView} setShowAuth={setShowAuth} />
             )
                 : (
-                 <Registration setIsLoginView={setIsLoginView} setShowAuth={setShowAuth}  />
-                    )
+                    <Registration setIsLoginView={setIsLoginView} setShowAuth={setShowAuth} />
+                )
                 : null}
 
             <div className=' h-16 md:h-20 w-full  p-3 flex items-center font-sans   fixed  bg-white  z-40 '>
@@ -49,8 +54,8 @@ function Navbar() {
                 <div className=' flex w-[50%] items-center justify-end pr-5 gap-5 md:gap-10'>
                     <a href="#"><Search size={17} /></a>
                     <a  ><User size={17} onClick={showUser} className=' cursor-pointer' /></a>
-                    <a href="#"><Heart size={17} /></a>
-                    <a href="#"><Handbag size={17} /></a>
+                    <Link to='/like'><Heart size={17} /></Link>
+                    <Link to='/cart'><Handbag size={17} /></Link>
                     <a href="#" className='flex md:hidden'><Menu size={17} /></a>
                 </div>
             </div>
@@ -60,3 +65,5 @@ function Navbar() {
 }
 
 export default Navbar
+
+

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getProducts } from "../api/product.api";
-import Loader from "../components/Loader";
+import Loader from "../components/loader/Loader";
 import Oops from "../components/Oops";
 import { Heart, ShoppingCart } from "lucide-react";
 import { useShop } from "../context/ShopContext";
@@ -9,7 +9,7 @@ import { useAuth } from "../context/AuthContext";
 
 function ProductPage() {
     const { id } = useParams(); // URL se ID ayegi (ladies, man, etc.)
-    const { addToCart, toggleLike, wishlist } = useShop();
+    const { addToCart, toggleLike, wishlist, isLiked, isCart } = useShop();
     const { catProduct, setCatProduct } = useAuth()
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);
@@ -55,7 +55,8 @@ function ProductPage() {
             setLoading(false);
 
         } catch (error) {
-            console.log(error);
+            console.log("baby error", error.message);
+            if (error.message === "Network Error") return setLoading(null);
             setLoading(false);
         }
     }
@@ -64,15 +65,17 @@ function ProductPage() {
 
     // Infinite Scroll Logic (Same as before)
     useEffect(() => {
-        const handleScroll = () => {
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-                if (hasNextPage && !loading) {
-                    setPage((p) => p + 1);
+        if (loading !== null) {
+            const handleScroll = () => {
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+                    if (hasNextPage && !loading) {
+                        setPage((p) => p + 1);
+                    }
                 }
-            }
-        };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+            };
+            window.addEventListener("scroll", handleScroll);
+            return () => window.removeEventListener("scroll", handleScroll);
+        }
     }, [hasNextPage, loading]);
 
     useEffect(() => {
@@ -85,8 +88,6 @@ function ProductPage() {
     return (
         <div className="w-full min-h-screen bg-white ">
 
-            {/* Error Handling */}
-            {loading === null ? <Oops /> : null}
 
             <div className='  md:hidden flex  gap-7 mx-5'>
                 <Link to='/product/all' className=' hover:underline uppercase '>All</Link>|
@@ -95,6 +96,8 @@ function ProductPage() {
                 <Link to='/product/kids' className=' hover:underline uppercase '>Kids</Link>
             </div>
 
+            {/* Error Handling */}
+            {loading === null ? <Oops /> : null}
 
             {/* PRODUCT GRID */}
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 ">
@@ -119,18 +122,22 @@ function ProductPage() {
                                     <div className="flex gap-1 items-center">
                                         <button
                                             onClick={() => toggleLike(item._id)}
-                                            className="uppercase flex items-center  hover:text-white border border-black px-1 py-1 md:px-2 md:py-2 "
+                                            className={`uppercase flex items-center border p-2  md:p-3   hover:bg-black hover:text-white
+                                                 ${isLiked(item._id) ? "bg-black text-white"
+                                                    : "bg-white text-black"}`
+                                            }
                                         >
                                             <Heart
                                                 size={15}
-                                                // fill={isLiked(item._id) ? "red" : "none"}
-                                                // color={isLiked(item._id) ? "red" : "black"}
+
                                             />
                                         </button>
                                         <button
                                             onClick={() => addToCart(item._id)}
-                                            className="uppercase hover:bg-black hover:text-white flex items-center gap-1 md:gap-3 border border-black px-1 md:px-2 md:py-1"
-                                        >
+                                            className={`uppercase flex items-center border p-1  md:p-2   hover:bg-black hover:text-white
+                                                 ${isCart(item._id) ? "bg-black text-white"
+                                                    : "bg-white text-black"}`
+                                            }   >
                                             Add
                                             <ShoppingCart size={15} />
                                         </button>
