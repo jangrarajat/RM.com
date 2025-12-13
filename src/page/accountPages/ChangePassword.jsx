@@ -45,7 +45,7 @@ function ChangePassword() {
 
         try {
             const res = await axios.patch(`${import.meta.env.VITE_API_URL}/api/user/resetPassword`, { oldPassword, newPassword }, { withCredentials: true })
-            console.log("success change password", res)
+           
             setMsgSuccess(true)
             unSetSuccessMsg()
         } catch (error) {
