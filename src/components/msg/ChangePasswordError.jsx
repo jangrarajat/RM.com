@@ -6,11 +6,11 @@ function ChangePasswordError({ setMsgError ,errorMsg, setErrorMsg}) {
         setTimeout(() => {
             setMsgError(false)
             setErrorMsg("")
-        }, 40000)
+        }, 5000)
     }, [])
     return (
-        <div className=' w-full md:w-[40%] h-16  flex gap-2 justify-center items-center px-5 uppercase bg-red-500 text-white '>
-            <CircleX size={15} />  <h1>{errorMsg}</h1>
+        <div className='text-xs font-light  w-full md:w-[40%] h-16  flex gap-2 justify-center items-center px-5 uppercase bg-red-600 text-white '>
+           <h1 className=' flex flex-col text-center justify-center items-center'> <CircleX size={15} />  {errorMsg}</h1>
         </div>
     )
 }

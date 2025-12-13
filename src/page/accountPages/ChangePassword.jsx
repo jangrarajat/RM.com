@@ -3,33 +3,72 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import AccountMenuBar from '../../components/AccountMenuBar'
 import ChangePasswordError from '../../components/msg/ChangePasswordError'
+import axios from 'axios'
+import ButtonLoader from '../../components/loader/ButtonLoader'
+import { CircleCheck } from 'lucide-react'
 
 function ChangePassword() {
     const navigate = useNavigate()
     const { user, logout, logoutLoading } = useAuth()
 
-    const [msgError, setMsgError] = useState(true)
+    const [msgError, setMsgError] = useState(false)
     const [errorMsg, setErrorMsg] = useState("")
+    const [msgSuccess, setMsgSuccess] = useState(false)
     const [oldPassword, setOldPassword] = useState("")
     const [newPassword, setNewPassword] = useState("")
     const [confirmNewPassword, setConfirmNewPassword] = useState("")
-
+    const [changePasswordLoading, setChangePasswordLoading] = useState(false)
 
     useEffect(() => {
         if (user === null) return navigate('/')
     }, [])
 
+    function setError(msg) {
+        setMsgError(true)
+        setErrorMsg(msg)
+        setChangePasswordLoading(false)
+    }
 
+    function unSetSuccessMsg() {
+        setTimeout(() => {
+            setMsgSuccess(false)
+        }, 5000)
+    }
 
 
     const handleChangePassword = async () => {
-        console.log("oldPassword", oldPassword,
-            " newPassword", newPassword,
-            "confirmNewPassword", confirmNewPassword
-        )
-        // if(newPassword !== confirmNewPassword) {
+        setChangePasswordLoading(true)
 
-        // }
+
+        if (oldPassword === "" || newPassword === "" || confirmNewPassword === "") return setError("All fields are requried")
+        if (newPassword !== confirmNewPassword) return setError("New password & conform password are not same")
+
+        try {
+            const res = await axios.patch(`${import.meta.env.VITE_API_URL}/api/user/resetPassword`, { oldPassword, newPassword }, { withCredentials: true })
+            console.log("success change password", res)
+            setMsgSuccess(true)
+            unSetSuccessMsg()
+        } catch (error) {
+            console.log("error in change password" , error.response?.data?.message)
+            setError(error.response?.data?.message)
+            if (error.response.data.message === "jwt expired" ) {
+                try {
+                    const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/refreshExpiredToken`, {}, { withCredentials: true })
+                    console.log(res)
+                   handleChangePassword()    
+                } catch (error) {
+                    logout()
+                    console.log("error in refreshExpiredtoken", error.response.data.message)
+                    throw error
+                } finally {
+
+                }
+            }
+        } finally {
+            setChangePasswordLoading(false)
+        }
+
+
     }
 
 
@@ -46,6 +85,11 @@ function ChangePassword() {
                 </div>
                 <div className=''>
                     <div className='flex  flex-col gap-2'>
+                        {msgSuccess ? (<>
+                            <div className="text-xs font-light  w-full md:w-[40%] h-16  flex gap-2 justify-center items-center px-5 uppercase bg-green-500 text-white">
+                                <CircleCheck />    <h1 className=' flex flex-col text-center justify-center items-center'>   Password Changed successfull</h1>
+                            </div></>) : null
+                        }
                         <label htmlFor="currentPassword">Current Password <span className='text-red-900'>*</span></label>
                         <input type="password" name="currentPassword" id='currentPassword' className=' border border-gray-400 w-full md:w-[40%] h-16 hover:border-gray-800 focus:outline-none px-5'
                             onChange={(e) => setOldPassword(e.target.value)}
@@ -66,11 +110,25 @@ function ChangePassword() {
 
                         {msgError ? (<ChangePasswordError setMsgError={setMsgError} errorMsg={errorMsg} setErrorMsg={setErrorMsg} />) : null}
 
-                        <button className=' border border-gray-400 w-full md:w-[40%] h-16 hover:border-gray-800 focus:outline-none px-5 uppercase bg-black text-white hover:bg-gray-900'
-                            onClick={handleChangePassword}
-                        >
-                            Change password
-                        </button>
+                        {
+                            changePasswordLoading ? (
+                                <>
+                                    <div className="border  border-gray-400 w-full md:w-[40%] h-16 hover:border-gray-800 focus:outline-none px-5 uppercase bg-black text-white flex justify-center items-center">
+                                        <ButtonLoader />
+                                    </div>
+                                </>
+                            )
+                                : (
+                                    <button className=' border border-gray-400 w-full md:w-[40%] h-16 hover:border-gray-800 focus:outline-none px-5 uppercase bg-black text-white hover:bg-gray-900'
+                                        onClick={handleChangePassword}
+                                    >
+                                        Change password
+                                    </button>
+                                )
+                        }
+
+
+
                     </div>
                 </div>
 
