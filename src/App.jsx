@@ -13,6 +13,7 @@ import AccountSettingsPage from './page/accountPages/AccountSettingsPage'
 import OrderaPage from './page/accountPages/OrderaPage'
 import DashboardPage from './page/accountPages/DashboardPage'
 import ChangePassword from './page/accountPages/ChangePassword'
+import ForgetPasswordPage from './page/forgetPasswordPage/ForgetPasswordPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -32,7 +33,8 @@ function App() {
         <Route path='/account/setting' element={<><Navbar /> <AccountSettingsPage /><Footer /></>} />
         <Route path='/account/orders' element={<><Navbar /> <OrderaPage /><Footer /></>} />
         <Route path='/account/dashboard' element={<><Navbar /> <DashboardPage /><Footer /></>} />
-        <Route path='/account/changepassword' element={<><Navbar /> <ChangePassword/><Footer /></>} />
+        <Route path='/account/changepassword' element={<><Navbar /> <ChangePassword /><Footer /></>} />
+        <Route path='/forget/password' element={<><Navbar /> <ForgetPasswordPage/></>} />
 
       </Routes>
 

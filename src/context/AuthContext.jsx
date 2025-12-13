@@ -5,7 +5,7 @@ const AuthContext = createContext();
 import { useNavigate } from "react-router-dom";
 
 export const AuthProvider = ({ children }) => {
-  // 2. State: Abhi user 'null' hai matlab koi login nahi hai
+
   const [user, setUser] = useState(null);
   const [catProduct, setCatProduct] = useState([])
   const [showAuth, setShowAuth] = useState(false)

@@ -4,9 +4,10 @@ import { useAuth } from '../../context/AuthContext'
 import Loader from '../loader/Loader'
 import ButtonLoader from '../loader/ButtonLoader'
 import FailedMsf from '../msg/FailedMsf'
+import { Link } from 'react-router-dom'
 
 function Login({ setIsLoginView, setShowAuth }) {
-    const { login, logout, loginLaoding, loginFailedMsg } = useAuth()
+    const { login, logout, loginLaoding, loginFailedMsg  } = useAuth()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
@@ -72,7 +73,11 @@ function Login({ setIsLoginView, setShowAuth }) {
                 }
 
                 <div className='w-full h-fit px-4'>
-                    <h1 className=' uppercase text-xs py-2 cursor-pointer hover:underline'>forget password</h1>
+                    <Link to="/forget/password" className=' uppercase text-xs py-2 cursor-pointer hover:underline' 
+                    onClick={()=>setShowAuth(false)}
+                    >
+                        forget password
+                    </Link>
                 </div>
 
 
