@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { getProducts } from "../api/product.api";
 import Loader from "../components/loader/Loader";
 import Oops from "../components/Oops";
-import { Heart, ShoppingCart } from "lucide-react";
+import { Heart, Instagram, ShoppingCart } from "lucide-react";
 import { useShop } from "../context/ShopContext";
 import { useAuth } from "../context/AuthContext";
 
@@ -159,7 +159,7 @@ function ProductPage() {
             )}
 
             {/* Footer Area (Logo etc) - Same as your original */}
-            <div className="w-full px-6 md:px-16 pb-10">
+            <div className="w-full px-6 md:px-16 ">
                 <img
                     src="https://res.cloudinary.com/drrj8rl9n/image/upload/v1763724939/Gemini_Generated_Image_9y17m59y17m59y17_aunkz4.jpg"
                     alt="logo"
@@ -168,6 +168,18 @@ function ProductPage() {
                 {/* Baki ka footer content waisa hi */}
 
 
+            </div>
+            <div className="flex flex-col md:flex-row px-10 pb-10 justify-between items-start md:items-center gap-5">
+                <p className="text-sm md:text-base ">
+                    The content of this site is copyright-protected and is the property
+                    of R & M .
+                </p>
+
+                <div className="flex gap-4">
+                    <a href="#">
+                        <Instagram />
+                    </a>
+                </div>
             </div>
         </div>
     );

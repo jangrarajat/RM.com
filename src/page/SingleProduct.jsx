@@ -5,6 +5,7 @@ import Loader from '../components/loader/Loader';
 import { getProductDetails } from '../api/productDietaild';
 import { Heart } from 'lucide-react';
 import { useShop } from '../context/ShopContext';
+import Footer from '../components/Footer';
 
 function SingleProduct() {
     const { id } = useParams();
@@ -87,7 +88,7 @@ function SingleProduct() {
                     </div>
                 ) : null
             }
-
+             <Footer/>
         </div>
     );
 }
