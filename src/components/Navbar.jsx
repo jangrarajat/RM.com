@@ -14,9 +14,7 @@ function Navbar() {
         isLoginView,
         setIsLoginView } = useAuth()
 
-    useEffect(() => {
-        console.log(user)
-    }, [])
+
 
     const showUser = () => {
         if (user === null) return setShowAuth(true)

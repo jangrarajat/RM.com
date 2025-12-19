@@ -17,13 +17,12 @@ import ForgetPasswordPage from './page/forgetPasswordPage/ForgetPasswordPage'
 import axios from 'axios'
 
 function App() {
-  const [count, setCount] = useState(0)
+  
   useEffect(() => {
     const activateDataBase = async () => {
       try {
-        console.log("Rajat baby")
         const res = await axios.get(`${import.meta.env.VITE_API_URL}`)
-        console.log(res)
+        console.log("activateDataBase status", res.status)
       } catch (error) {
         console.log("error in activateDataBase", error.message)
         throw error
