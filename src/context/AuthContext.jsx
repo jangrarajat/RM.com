@@ -18,6 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [loginFailedMsg, setLoginFailedMsg] = useState(false)
   const [loginErrorMsg, setLoginErrorMsg] = useState("")
   const [logoutLoading, setLogoutLoading] = useState(false)
+ 
   const navigate = useNavigate()
 
 
@@ -29,7 +30,7 @@ export const AuthProvider = ({ children }) => {
       console.log("Login ho gaya:", res.data.user);
       setUser(res.data.user);
       localStorage.setItem("user", JSON.stringify(res.data.user))
-      
+
       setShowAuth(false)
       setLoginLaoding(false)
       navigate('/user')
@@ -63,7 +64,7 @@ export const AuthProvider = ({ children }) => {
       setUser(null);
       console.log("User Logout ho gaya");
     } catch (error) {
-      console.log("error in logout", error.response.data.message )
+      console.log("error in logout", error.response.data.message)
       if (error.response.data.message === "jwt expired" || "UnAuthroize request") {
         try {
           const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/refreshExpiredToken`, {}, { withCredentials: true })
