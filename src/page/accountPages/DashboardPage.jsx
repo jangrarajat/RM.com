@@ -372,7 +372,7 @@ function ProductManager({ products, refreshData, page, setPage, totalPages, sear
                         />
                     </div>
                 </div>
-                <button onClick={() => setIsAdding(!isAdding)} className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-2.5 rounded-xl flex items-center gap-2 hover:shadow-lg hover:scale-105 transition-all w-full md:w-auto justify-center font-bold">
+                <button onClick={() => setIsAdding(!isAdding)} className="bg-gradient-to-r from-red-600 to-red-400 text-white px-6 py-2.5 rounded-xl flex items-center gap-2 hover:shadow-lg hover:scale-105 transition-all w-full md:w-auto justify-center font-bold">
                     {isAdding ? <X size={20}/> : <Plus size={20}/>} {isAdding ? 'Cancel' : 'Add Product'}
                 </button>
             </div>
@@ -405,7 +405,7 @@ function ProductManager({ products, refreshData, page, setPage, totalPages, sear
                             <Input label="Fabric" name="fabric" val={formData} set={setFormData} />
                             
                             <div className="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100">
-                                <label className="block text-xs font-bold text-indigo-800 mb-2">Variants</label>
+                                <label className="block text-xs font-bold text-red-500 mb-2">Variants</label>
                                 {variants.map((v, i) => (
                                     <div key={i} className="flex gap-2 mb-2">
                                         <input placeholder="Color" className="border-0 bg-white shadow-sm p-2 rounded-lg w-1/3 text-sm" value={v.color} onChange={e => {const n=[...variants];n[i].color=e.target.value;setVariants(n)}} />
@@ -413,7 +413,7 @@ function ProductManager({ products, refreshData, page, setPage, totalPages, sear
                                         <input placeholder="Stock" type="number" className="border-0 bg-white shadow-sm p-2 rounded-lg w-1/3 text-sm" value={v.stock} onChange={e => {const n=[...variants];n[i].stock=e.target.value;setVariants(n)}} />
                                     </div>
                                 ))}
-                                <button type="button" onClick={() => setVariants([...variants, {color:'',size:'',stock:0}])} className="text-xs text-indigo-600 font-bold mt-1">+ Add Variant</button>
+                                <button type="button" onClick={() => setVariants([...variants, {color:'',size:'',stock:0}])} className="text-xs text-red-500 font-bold mt-1">+ Add Variant</button>
                             </div>
                         </div>
 
@@ -430,7 +430,7 @@ function ProductManager({ products, refreshData, page, setPage, totalPages, sear
                                             <>
                                                 <img src={imagePreviews[0]} alt="Main" className="w-full h-full object-contain" />
                                                 <button type="button" onClick={() => removeImage(0)} className="absolute top-2 right-2 bg-white/80 p-1 rounded-full shadow-sm text-red-500"><X size={16}/></button>
-                                                <div className="absolute bottom-0 w-full bg-indigo-600/90 backdrop-blur-sm text-white text-xs text-center py-1 font-bold">Main Display Image</div>
+                                                <div className="absolute bottom-0 w-full bg-red-500/90 backdrop-blur-sm text-white text-xs text-center py-1 font-bold">Main Display Image</div>
                                             </>
                                         ) : (
                                             <>
@@ -472,7 +472,7 @@ function ProductManager({ products, refreshData, page, setPage, totalPages, sear
                 </div>
             )}
 
-            <div className="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/50 overflow-hidden shadow-xl">
+            <div className="bg-white/60 backdrop-blur-xl rounded-3xl border border-white/50 overflow-auto  shadow-xl">
                 <table className="w-full text-left text-sm min-w-[600px]">
                     <thead className="bg-white/50 border-b border-gray-100 text-gray-500 uppercase tracking-wider text-xs">
                         <tr><th className="p-5">Product</th><th className="p-5">Price</th><th className="p-5">Variants/Stock</th><th className="p-5">Action</th></tr>
