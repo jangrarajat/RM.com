@@ -1,6 +1,7 @@
 import React, { createContext, use, useContext, useEffect, useState } from "react";
 import axios from "axios";
-// 1. Context Create kiya (Dabba banaya)
+
+import { BASE_URL } from "../api/baseUrl";
 const AuthContext = createContext();
 import { useNavigate } from "react-router-dom";
 
@@ -20,7 +21,7 @@ export const AuthProvider = ({ children }) => {
   const [logoutLoading, setLogoutLoading] = useState(false)
 
   const navigate = useNavigate()
-  const BASE_URL = import.meta.env.VITE_API_URL || "";
+
 
   const login = async (email, password) => {
     setLoginLaoding(true)
@@ -59,7 +60,7 @@ export const AuthProvider = ({ children }) => {
     try {
       localStorage.removeItem('user')
       window.location.href = "/"
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/logout`, {}, { withCredentials: true })
+      const res = await axios.post(`${BASE_URL}/api/user/logout`, {}, { withCredentials: true })
       console.log(res)
       setUser(null);
       console.log("User Logout ho gaya");
@@ -67,7 +68,7 @@ export const AuthProvider = ({ children }) => {
       console.log("error in logout", error.response.data.message)
       if (error.response.data.message === "jwt expired" || "UnAuthroize request") {
         try {
-          const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/refreshExpiredToken`, {}, { withCredentials: true })
+          const res = await axios.post(`${BASE_URL}/api/user/refreshExpiredToken`, {}, { withCredentials: true })
           console.log(res)
           logout()
 
@@ -86,7 +87,7 @@ export const AuthProvider = ({ children }) => {
   const Registration = async (username, email, password) => {
     setRegistrationLaoding(true)
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/registration`, { username, email, password })
+      const res = await axios.post(`${BASE_URL}/api/user/registration`, { username, email, password })
       setRegistrationSuccessMsg(true)
       console.log(res)
     } catch (error) {

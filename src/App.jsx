@@ -16,13 +16,14 @@ import ChangePassword from './page/accountPages/ChangePassword'
 import ForgetPasswordPage from './page/forgetPasswordPage/ForgetPasswordPage'
 import axios from 'axios'
 import CheckoutPage from './page/CheckoutPage'
+import { BASE_URL } from './api/baseUrl'
 
 function App() {
 
   useEffect(() => {
     const activateDataBase = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}`)
+        const res = await axios.get(`${BASE_URL}`)
         console.log("activateDataBase status", res.status)
       } catch (error) {
         console.log("error in activateDataBase", error.message)

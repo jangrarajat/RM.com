@@ -5,6 +5,7 @@ import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 import Loader from '../../components/loader/Loader';
 import { Package, XCircle, AlertTriangle } from 'lucide-react';
+import { BASE_URL } from '../../api/baseUrl';
 
 function OrderaPage() {
     const { user } = useAuth();
@@ -22,7 +23,7 @@ function OrderaPage() {
 
     const fetchOrders = async () => {
         try {
-            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/order/my-orders`, { withCredentials: true });
+            const res = await axios.get(`${BASE_URL}/api/order/my-orders`, { withCredentials: true });
             if (res.data.success) {
                 setOrders(res.data.orders);
             }
@@ -35,7 +36,7 @@ function OrderaPage() {
 
     const handleCancelOrder = async () => {
         try {
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/order/cancel/Odder`, { orderId: cancelModal.orderId }, { withCredentials: true });
+            const res = await axios.post(`${BASE_URL}/api/order/cancel/Odder`, { orderId: cancelModal.orderId }, { withCredentials: true });
             if (res.data.success) {
                 fetchOrders(); // Refresh Data
                 setCancelModal({ show: false, orderId: null });

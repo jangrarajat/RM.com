@@ -6,7 +6,7 @@ import Registration from "../components/auth/Registration";
 import axios from "axios";
 import { refreshExpriedToken } from "../api/refreshExpiredToken";
 const ShopContext = createContext();
-
+import { BASE_URL } from "../api/baseUrl";
 export const ShopProvider = ({ children }) => {
   const { user,
     logout,
@@ -25,12 +25,12 @@ export const ShopProvider = ({ children }) => {
       // FIX 1: Removed the empty {} object. 
       // axios.get(url, config) <-- Correct syntax
       const resLike = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/like/likeList`,
+        `${BASE_URL}/api/like/likeList`,
         { withCredentials: true }
       );
 
       const resCart = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/cart/cartList`,
+        `${BASE_URL}/api/cart/cartList`,
         { withCredentials: true }
       );
 
@@ -48,7 +48,7 @@ export const ShopProvider = ({ children }) => {
       if (errorMessage === "jwt expired" || errorMessage === "UnAuthroize request") {
         try {
           const res = await axios.post(
-            `${import.meta.env.VITE_API_URL}/api/user/refreshExpiredToken`,
+            `${BASE_URL}/api/user/refreshExpiredToken`,
             {},
             { withCredentials: true }
           );
@@ -106,14 +106,14 @@ export const ShopProvider = ({ children }) => {
       if (alreadyLiked) {
         console.log("Unliked API Call:", id);
         await axios.post(
-          `${import.meta.env.VITE_API_URL}/api/like/dislikeProduct`,
+          `${BASE_URL}/api/like/dislikeProduct`,
           { productId: id },
           { withCredentials: true }
         );
       } else {
         console.log("Liked API Call:", id);
         await axios.post(
-          `${import.meta.env.VITE_API_URL}/api/like/likeProduct`,
+          `${BASE_URL}/api/like/likeProduct`,
           { productId: id },
           { withCredentials: true }
         );
@@ -176,7 +176,7 @@ export const ShopProvider = ({ children }) => {
       } else {
         console.log("Adding to Cart API:", id);
         const res = await axios.post(
-          `${import.meta.env.VITE_API_URL}/api/cart/addCartProduct`,
+          `${BASE_URL}/api/cart/addCartProduct`,
           { productId: id },
           { withCredentials: true }
         );

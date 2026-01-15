@@ -1,11 +1,11 @@
 import axios from "axios";
-
+import { BASE_URL } from "./baseUrl";
 
 const refreshExpriedToken = async () => {
     console.log("trying to refresh Expried Token")
     try {
         const res = await axios.post(
-            `${import.meta.env.VITE_API_URL}/api/user/refreshExpiredToken`,
+            `${BASE_URL}/api/user/refreshExpiredToken`,
             {},
             { withCredentials: true }
         );

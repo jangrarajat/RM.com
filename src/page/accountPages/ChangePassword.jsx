@@ -6,6 +6,7 @@ import ChangePasswordError from '../../components/msg/ChangePasswordError'
 import axios from 'axios'
 import ButtonLoader from '../../components/loader/ButtonLoader'
 import { CircleCheck } from 'lucide-react'
+import { BASE_URL } from '../../api/baseUrl'
 
 function ChangePassword() {
     const navigate = useNavigate()
@@ -44,7 +45,7 @@ function ChangePassword() {
         if (newPassword !== confirmNewPassword) return setError("New password & conform password are not same")
 
         try {
-            const res = await axios.patch(`${import.meta.env.VITE_API_URL}/api/user/resetPassword`, { oldPassword, newPassword }, { withCredentials: true })
+            const res = await axios.patch(`${BASE_URL}/api/user/resetPassword`, { oldPassword, newPassword }, { withCredentials: true })
            
             setMsgSuccess(true)
             unSetSuccessMsg()
@@ -53,7 +54,7 @@ function ChangePassword() {
             setError(error.response?.data?.message)
             if (error.response.data.message === "jwt expired" ) {
                 try {
-                    const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/user/refreshExpiredToken`, {}, { withCredentials: true })
+                    const res = await axios.post(`${BASE_URL}/api/user/refreshExpiredToken`, {}, { withCredentials: true })
                     console.log(res)
                    handleChangePassword()    
                 } catch (error) {

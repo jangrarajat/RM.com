@@ -1,9 +1,9 @@
 import axios from "axios";
-
+import { BASE_URL } from "./baseUrl";
 export const getProducts = async (category, page) => {
     try {
         const res = await axios.get(
-            `${import.meta.env.VITE_API_URL}/api/limited/getLimitProduct?category=${category}&limit=8&page=${page}`
+            `${BASE_URL}/api/limited/getLimitProduct?category=${category}&limit=8&page=${page}`
         );
        
         return res.data;

@@ -5,6 +5,7 @@ import { useAuth } from '../context/AuthContext';
 import { useShop } from '../context/ShopContext';
 import { MapPin, Plus, CheckCircle, CreditCard, Banknote } from 'lucide-react';
 import Loader from '../components/loader/Loader';
+import { BASE_URL } from '../api/baseUrl';
 
 function CheckoutPage() {
     const { state } = useLocation(); // Data from 'Buy Now'
@@ -30,7 +31,7 @@ function CheckoutPage() {
     // 1. Fetch Addresses
     const fetchAddresses = async () => {
         try {
-            const res = await axios.get(`${import.meta.env.VITE_API_URL}/address/get-all-address`, { withCredentials: true });
+            const res = await axios.get(`${BASE_URL}/address/get-all-address`, { withCredentials: true });
             if (res.data.success) {
                 setAddresses(res.data.addresses);
                 // Auto Select Default
@@ -52,7 +53,7 @@ function CheckoutPage() {
         e.preventDefault();
         setLoading(true);
         try {
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/address/add-address`, formData, { withCredentials: true });
+            const res = await axios.post(`${BASE_URL}/address/add-address`, formData, { withCredentials: true });
             if (res.data.success) {
                 await fetchAddresses(); // Refresh list
                 setIsAddingNew(false); // Close form
@@ -101,7 +102,7 @@ function CheckoutPage() {
         };
 
         try {
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/order/place-order`, payload, { withCredentials: true });
+            const res = await axios.post(`${BASE_URL}/api/order/place-order`, payload, { withCredentials: true });
             if (res.data.success) {
                 // Success! Go to Orders page
                 navigate('/user/orders'); 

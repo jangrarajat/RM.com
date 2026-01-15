@@ -1,9 +1,9 @@
 import axios from 'axios';
-// Aapka banaya hua function yahan import kar rahe hain
+import { BASE_URL } from './baseUrl';
 import { refreshExpriedToken } from './refreshExpiredToken'; 
 
 const API = axios.create({
-    baseURL: import.meta.env.VITE_API_URL, 
+    baseURL: {BASE_URL}, 
     withCredentials: true // Cookies bhejne ke liye zaroori hai
 });
 
