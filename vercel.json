@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://aapka-backend-url-yahan-dalein.onrender.com/api/:path*"
+      "destination": "https://raahi-ecommers-website.onrender.com/api/:path*"
     },
     {
       "source": "/(.*)",
