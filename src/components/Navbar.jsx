@@ -54,7 +54,7 @@ function Navbar() {
                     <a  ><User size={17} onClick={showUser} className=' cursor-pointer' /></a>
                     <Link to='/like'><Heart size={17} /></Link>
                     <Link to='/cart'><Handbag size={17} /></Link>
-                    <a href="#" className='flex md:hidden'><Menu size={17} /></a>
+                    {/* <a href="#" className='flex md:hidden'><Menu size={17} /></a> */}
                 </div>
             </div>
             <div className=' h-16 md:h-20 w-full p-3 relative bg-white'></div>
