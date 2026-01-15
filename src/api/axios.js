@@ -3,7 +3,7 @@ import { BASE_URL } from './baseUrl';
 import { refreshExpriedToken } from './refreshExpiredToken'; 
 
 const API = axios.create({
-    baseURL: {BASE_URL}, 
+    baseURL: `${import.meta.env.VITE_API_URL || ""}`, 
     withCredentials: true // Cookies bhejne ke liye zaroori hai
 });
 
