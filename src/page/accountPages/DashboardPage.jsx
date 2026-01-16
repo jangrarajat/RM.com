@@ -325,7 +325,7 @@ function DashboardPage() {
                         <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-red-600 to-red-400 text-white flex items-center justify-center font-bold text-lg shadow-lg border-2 border-white">R</div>
                     </div>
                 </header>
-                <main className="flex-1 overflow-x-hidden overflow-y-auto p-4 md:p-8 scroll-smooth">
+                <main className="flex-1 mb-20 overflow-x-hidden overflow-y-auto p-4 md:p-8 scroll-smooth">
                     {renderContent()}
                 </main>
             </div>
